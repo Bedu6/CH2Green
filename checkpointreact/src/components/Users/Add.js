@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import {addUser} from '../actions/userActions'
 
 class Add extends Component {
   state = {
     name: '',
-    age: '',
     last_namep:'',
-    last_namem:''
+    last_namem:'',
+    age: null,
   }
   handleChange = (e) => {
     this.setState({
@@ -14,7 +16,7 @@ class Add extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.addUser(this.state);
   }
   render() {
     return (
@@ -40,10 +42,21 @@ class Add extends Component {
           <div className="input-field">
             <button className="btn green lighten-1 z-depth-0">Agregar</button>
           </div>
+          <div className="input-field">
+            <button className="btn red lighten-1 z-depth-0">Cancelar</button>
+          </div>
         </form>
       </div>
     )
   }
 }
 
-export default Add
+const mapDispatchToProps = dispatch => {
+  return {
+    addUser: (user) => dispatch(addUser(user))
+  }
+}
+
+//const mapStateToProps = ({usersReducer}) => usersReducer
+
+export default connect(null,mapDispatchToProps)(Add)

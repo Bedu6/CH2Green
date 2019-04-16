@@ -1,13 +1,14 @@
 import React from 'react';
 import ItemList from './ItemList'
 
-const List = () => {
+const List = ({users}) => {
     return (
         <div className="my-table section">
-            <ItemList/>
-            <ItemList/>
-            <ItemList/>
-            <ItemList/>
+            {users && users.map(user=>{
+                return(
+                    <ItemList user={user} key={user.id}/>
+                )
+            })}
         </div>
     );
 }
