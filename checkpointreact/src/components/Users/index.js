@@ -1,15 +1,30 @@
 import React, { Component } from 'react';
 import List from './List'
 import {connect} from 'react-redux'
-import {Icon} from 'react-materialize';
+import {Icon,Table} from 'react-materialize';
 import {Link} from 'react-router-dom';
-import * as userActions from '../actions/userActions'
+import {showUsers} from'../actions/userActions'
 
 class index extends Component {
+    componentDidMount(){
+        this.props.showUsers();
+    };
+    
+    renderUsersList() {
+        return this.props.users.map((user) => {
+          return (
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>{user.name}</td>
+              <td>{user.username}</td>
+              <td>{user.email}</td>
+            </tr>
+          )
+        })
+    }
+
     render() {
         //console.log(this.props)
-        const {users}=this.props
-
         return (
             <div className="container">
                 <div className='flex align_center right'>
@@ -21,7 +36,21 @@ class index extends Component {
                     </Link>
                 </div>
                 <div className="list">
-                    <List users={users}/>
+                    {/* <List users={users}/> */}
+                    <h2>Users List</h2>
+                    <Table responsive>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            { this.renderUsersList() }
+                        </tbody>
+                    </Table> 
                 </div>
             </div>
         );
@@ -37,4 +66,4 @@ const mapStateToProps = (state) => {
   }
 
 
-export default connect(mapStateToProps)(index);
+export default connect(mapStateToProps,{showUsers})(index);
