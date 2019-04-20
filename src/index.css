@@ -1,0 +1,15 @@
+.flex {
+	display: flex;
+}
+
+.align_center {
+	align-items: center;
+}
+
+.justify_center {
+	justify-content: center;
+}
+
+.space {
+	margin-left: 30px;
+}
