@@ -55,7 +55,7 @@ export const edit = (info, id) => async (dispatch) => {
 	dispatch({ type: LOADING });
 
 	try {
-		await axios.put(`https://g6-ch2.herokuapp.com/api/usuarios/green/${id}`, info);
+		await axios.post(`https://g6-ch2.herokuapp.com/api/usuarios/green/${id}`, info);
 		
 		window.Materialize.toast(
 			'¡Changes saved!',

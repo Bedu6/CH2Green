@@ -1,5 +1,5 @@
 import React from 'react';
-import { Collection, Row, Col } from 'react-materialize';
+import { Collection } from 'react-materialize';
 
 const Deps = (props) => (
 

@@ -1,14 +1,14 @@
 import axios from 'axios';
 import {
-	BRING_DEP_INFO, ERROR_DEP_INFO, LOADING_DEPS, NEW_DEPENDENCY,
-    NEW_DEP_NAME, NEW_DEP_AGE, DEP_ADDED, DEP_EDITED 
+	BRING_DEP_INFO, ERROR_DEP_INFO, LOADING_DEPS, //NEW_DEPENDENCY,
+    // NEW_DEP_NAME, NEW_DEP_AGE, DEP_ADDED, DEP_EDITED 
 } from '../Types/dependentsTypes';
 
 export const bringDeps = () => async (dispatch) => {
 	dispatch({ type: LOADING_DEPS });
 
 	try {
-		const response = await axios.get('https://g6-ch2.herokuapp.com/api/usuarios/green');
+		const response = await axios.get(`https://g6-ch2.herokuapp.com/api/dependientes/green/`);
 		
 		dispatch({
 			type: BRING_DEP_INFO,

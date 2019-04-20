@@ -20,7 +20,7 @@ class index extends Component {
                 key={ key }
             >
                 <Link
-				    to={`/deps/${info._usuario}`}
+				    to={`/deps/${info._id}`}
 				>
                     <Icon 
                         className="circle"
@@ -29,15 +29,15 @@ class index extends Component {
                     </Icon>
                 </Link>
                 <span className="title">
-                    { info.nombre }
+                    { info.nombre_completo }
                 </span>
                 <p>
-                    { info.nombre }  
+                    { info.dependencia }  
                     <br/>
                     { info.edad }
                 </p>
                 <Link
-				    to={`/deps/${info._usuario}`}
+				    to={`/deps/${info._id}`}
 				>
                     <Icon 
                         className="secondary-content"
