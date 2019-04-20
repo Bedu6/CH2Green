@@ -1,33 +1,64 @@
 import React, { Component } from 'react';
-import List from './List'
-import {connect} from 'react-redux'
-import {Icon,Table} from 'react-materialize';
-import {Link} from 'react-router-dom';
-import {showUsers} from'../actions/userActions'
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import * as userActions from '../../Actions/userActions';
+import { Icon } from 'react-materialize';
+import Loading from '../General/loading';
+import Fatal from '../General/fatal';
+import Tables from './usersTable';
 
 class index extends Component {
-    componentDidMount(){
-        this.props.showUsers();
-    };
-    
-    renderUsersList() {
-        return this.props.users.map((user) => {
-          return (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-            </tr>
-          )
-        })
-    }
+	componentDidMount() {
+		if (!this.props.info.length)
+			this.props.bringComments();
+	}
 
-    render() {
-        //console.log(this.props)
-        return (
-            <div className="container">
-                <div className='flex align_center right'>
+	show = () => (
+		this.props.info.map((info, key) => (
+			<tr key={ key }>
+			  <td>{ info.apellidos.paterno }</td>
+			  <td>{ info.apellidos.materno }</td>
+			  <td>{ info.nombre }</td>
+			  <td>{ info.edad }</td>
+			  <td>
+				  <Link
+					  to={`/deps/${info._id}`}
+				  >
+			  		<Icon>people</Icon>
+				  </Link>
+			  </td>
+			  <td>
+				  <Link
+					  to={`/edit/${info._id}`}  
+				  >
+			  		<Icon>edit</Icon>
+				  </Link>
+			  </td>
+			  <td>
+				  <Link
+					  to={`/remove/${info._id}`}
+				  >
+			  		<Icon>delete</Icon>
+				  </Link>
+			  </td>
+			</tr>
+		))
+	);
+
+	putInfo = () => {
+		if (this.props.loading)
+			return <Loading />
+
+		if (this.props.error)
+			return <Fatal message={ this.props.error } />
+
+		return <Tables show={ this.show } />
+	};
+
+	render() {
+		return (
+			<div className="container">
+				<div className='flex align_right right'>
                     <Link 
                     icon="add" 
                     to="/add" 
@@ -35,35 +66,18 @@ class index extends Component {
                         <i className="material-icons">add</i>
                     </Link>
                 </div>
-                <div className="list">
-                    {/* <List users={users}/> */}
-                    <h2>Users List</h2>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { this.renderUsersList() }
-                        </tbody>
-                    </Table> 
-                </div>
-            </div>
-        );
-    }
+				<div className='flex align_center'>
+					<h2>Users</h2>
+				</div>
+
+				{ this.putInfo() }
+			</div>
+		);
+	}
 }
 
-//const mapStateToProps=({userActions})=>userActions
+const mapStateToProps = (allReducers) => {
+	return allReducers.usersReducers;
+}
 
-const mapStateToProps = (state) => {
-    return {
-      users: state.user.users
-    }
-  }
-
-
-export default connect(mapStateToProps,{showUsers})(index);
+export default connect(mapStateToProps, userActions)(index);
