@@ -26,6 +26,12 @@ class index extends Component {
 				  >
 			  		<Icon>people</Icon>
 				  </Link>
+				  
+				  <Link
+					  to={`/add_dep/${info._id}`}
+				  >
+			  		<Icon>add</Icon>
+				  </Link>
 			  </td>
 			  <td>
 				  <Link

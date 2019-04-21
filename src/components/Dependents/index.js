@@ -20,7 +20,7 @@ class index extends Component {
                 key={ key }
             >
                 <Link
-				    to={`/deps/${info._id}`}
+				    to={`/edit_dep/${info._id}`}
 				>
                     <Icon 
                         className="circle"
@@ -37,7 +37,7 @@ class index extends Component {
                     { info.edad }
                 </p>
                 <Link
-				    to={`/deps/${info._id}`}
+				    to={`/remove/${info._id}`}
 				>
                     <Icon 
                         className="secondary-content"
