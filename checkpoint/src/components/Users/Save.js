@@ -96,7 +96,7 @@ class Save extends Component  {
 					</Button>
 				</div>
 	
-				{ (this.props.cargando) ? <Loading /> : '' }
+				{ (this.props.loading) ? <Loading /> : '' }
 			</div>
 		)
 	}

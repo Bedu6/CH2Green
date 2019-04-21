@@ -44,7 +44,8 @@ export default (state = INITIAL_STATE, action) => {
 			return { ...state, loading: false, info: [] };
 
 		case DELETE_USER:
-            return { ...state, loading: false,info: []  };
+			return { ...state, loading: false,info: []  };
+
 		default: return state;
 	}
 };

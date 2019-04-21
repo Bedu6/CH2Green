@@ -55,7 +55,7 @@ export const edit = (info, id) => async (dispatch) => {
 	dispatch({ type: LOADING });
 
 	try {
-		await axios.put(`https://g6-ch2.herokuapp.com/api/usuarios/green/${id}`, info);
+		await axios.post(`https://g6-ch2.herokuapp.com/api/usuarios/green/${id}`, info);
 		
 		window.Materialize.toast(
 			'¡Changes saved!',
@@ -103,25 +103,6 @@ export const bringComment = (id) => async (dispatch) => {
 			payload: error.message
 		});
 	}
-
-	// export const drop = (info, id) => async (dispatch) => {
-	// 	dispatch({ type: LOADING });
-	
-	// 	try {
-	// 		await axios.delete(`https://g6-ch2.herokuapp.com/api/usuarios/green/${id}`, info);
-			
-	// 		window.alert();
-	
-	// 		dispatch({ type: EDITED });
-	// 	}
-	// 	catch (error) {
-	// 		window.Materialize.toast(
-	// 			'Something is wrong, try later',
-	// 			3000
-	// 		);
-	// 		dispatch({ type: ERROR });
-	// 	}
-	// };
 };
 
 export const deleteUser = (id) => async (dispatch) => {
