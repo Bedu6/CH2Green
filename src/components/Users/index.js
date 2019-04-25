@@ -42,7 +42,10 @@ class index extends Component {
 			  </td>
 			  <td>
 				  <Link
-					  to={`/remove/${info._id}`}
+					  to={`/`}
+						onClick={()=>{
+							this.deleteUser(info._id)
+						}}
 				  >
 			  		<Icon>delete</Icon>
 				  </Link>
@@ -60,6 +63,10 @@ class index extends Component {
 
 		return <Tables show={ this.show } />
 	};
+
+	deleteUser=(id)=>{
+		this.props.deleteUser(id)
+	}
 
 	render() {
 		return (
